@@ -11,6 +11,31 @@
   <link rel="stylesheet" href="style/style.css">
 </head>
 
+  <audio id="bgMusic" loop>
+  <source src="song.mp3" type="audio/mpeg">
+  您的浏览器不支持 audio 元素。
+</audio>
+
+<script>
+  // 解决浏览器自动播放限制：在用户第一次与页面交互后（如点击）再播放音乐
+  document.addEventListener('click', function() {
+    const music = document.getElementById('bgMusic');
+    // 检查音乐是否还未开始播放
+    if (music.paused) {
+      music.play().catch(function(error) {
+        console.log('自动播放被阻止，需要用户交互。可以提示用户点击页面开启音乐。');
+      });
+    }
+  }, { once: true }); // { once: true } 确保这个监听只执行一次
+</script>
+
+<style>
+  /* 隐藏音频控件，因为我们希望它是背景音乐 */
+  audio { 
+    display: none;
+  }
+</style>
+  
 <body>
   <div class="container">
     <div class="one">
@@ -130,29 +155,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
 <script type="application/javascript" src="script/main.js"></script>
 
-<audio id="bgMusic" loop>
-  <source src="song.mp3" type="audio/mpeg">
-  您的浏览器不支持 audio 元素。
-</audio>
 
-<script>
-  // 解决浏览器自动播放限制：在用户第一次与页面交互后（如点击）再播放音乐
-  document.addEventListener('click', function() {
-    const music = document.getElementById('bgMusic');
-    // 检查音乐是否还未开始播放
-    if (music.paused) {
-      music.play().catch(function(error) {
-        console.log('自动播放被阻止，需要用户交互。可以提示用户点击页面开启音乐。');
-      });
-    }
-  }, { once: true }); // { once: true } 确保这个监听只执行一次
-</script>
-
-<style>
-  /* 隐藏音频控件，因为我们希望它是背景音乐 */
-  audio { 
-    display: none;
-  }
-</style>
 
 </html>
